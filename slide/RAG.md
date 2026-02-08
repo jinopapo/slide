@@ -198,6 +198,36 @@ style: |
   }
   .checklist li { margin-bottom: 8px; }
   .checklist li::marker { color: var(--accent); }
+
+  /* --- Code blocks (override Marp default theme) --- */
+  section :is(pre, marp-pre) {
+    background: rgba(0, 0, 0, 0.28) !important;
+    border: 1px solid rgba(255, 255, 255, 0.14) !important;
+    border-radius: 14px !important;
+    padding: 18px 20px !important;
+    box-shadow: 0 8px 22px rgba(0, 0, 0, 0.22);
+    line-height: 1.35 !important;
+    overflow: hidden !important;
+    width: 100%;
+    margin-top: 14px;
+  }
+  section :is(pre, marp-pre) code {
+    /* Marp default theme uses 12px fixed -> too small. Override with scalable size. */
+    font-size: 1.05rem !important;
+    color: var(--text) !important;
+    background: transparent !important;
+    padding: 0 !important;
+    white-space: pre-wrap;
+    word-break: break-word;
+  }
+  section code {
+    /* inline code */
+    font-size: 0.95em;
+    background: rgba(0, 0, 0, 0.18);
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    border-radius: 8px;
+    padding: 0.08em 0.35em;
+  }
 ---
 
 <!-- _class: lead -->
@@ -272,32 +302,22 @@ style: |
 
 ---
 # 一番シンプルなRAG構成
-<div class="rag-flow">
-  <div class="rag-row">
-    <span class="rag-node">ドキュメント</span>
-    <span class="rag-arrow">→</span>
-    <span class="rag-node subtle">Embedding</span>
-    <span class="rag-arrow">→</span>
-    <span class="rag-node rag-store">ベクトルストレージに保存</span>
-  </div>
-  <div class="rag-row">
-    <span class="rag-node">ユーザー</span>
-    <span class="rag-arrow">→</span>
-    <span class="rag-node">クエリ入力</span>
-    <span class="rag-arrow">→</span>
-    <span class="rag-node subtle">クエリEmbedding</span>
-    <span class="rag-arrow">→</span>
-    <span class="rag-node">Retriever</span>
-    <span class="rag-arrow">→</span>
-    <span class="rag-node">ベクトル検索</span>
-    <span class="rag-arrow">→</span>
-    <span class="rag-node">検索結果</span>
-    <span class="rag-arrow">→</span>
-    <span class="rag-node">Generator</span>
-    <span class="rag-arrow">→</span>
-    <span class="rag-node">回答を返す</span>
-  </div>
-</div>
+![bg](./rag-simple2.png)
+
+---
+# generatorのプロンプト例
+```
+関連する情報をもとに、質問に答えてください。
+
+# 質問
+{user_query}
+
+# 関連情報
+## document1
+{document1}
+## document2
+{document2}
+```
 
 ---
 # なぜうまくいかないのか
@@ -360,6 +380,10 @@ style: |
 - 代表的アルゴリズムはRRF
   - 両方で上位に来る文書を高く評価する発想
 - AIにマージソートさせる手法もあるがコスト大
+
+---
+# ちょっと凝ったRAG構成
+![bg](./rag-full2.png)
 
 ---
 # 検索を整えてもなぜうまくいかないのか

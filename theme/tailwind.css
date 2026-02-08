@@ -1,0 +1,3 @@
+/* @theme tailwind */
+@import 'default';
+@import "../dist/tailwind.css";
