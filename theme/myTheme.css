@@ -1,0 +1,98 @@
+/* @theme myTheme */
+@import 'default';
+
+  :root {
+    --bg: #454552;
+    --text: #d8e9ef;
+    --accent: #4ea1d3;
+    --accent-2: #e85a71;
+  }
+  section {
+    background: var(--bg);
+    color: var(--text);
+    font-family: "Inter", "Hiragino Kaku Gothic ProN", "Noto Sans JP", sans-serif;
+    letter-spacing: 0.02em;
+    text-align: left;
+    padding: 50px 60px 40px;
+  }
+  section:not(.lead) {
+    display: flex !important;
+    text-align: left !important;
+    justify-content: flex-start !important;
+    align-items: flex-start !important;
+    flex-direction: column;
+  }
+  section:not(.lead) > * {
+    margin-left: 0 !important;
+  }
+  section.lead * {
+    text-align: center !important;
+  }
+  section.lead {
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: 0;
+  }
+  h1, h2 {
+    color: var(--accent);
+    font-weight: 700;
+  }
+  h3 {
+    color: var(--text);
+    font-weight: 700;
+  }
+  h1 { font-size: 2.2rem; }
+  h2 { font-size: 1.8rem; }
+  h3 { font-size: 1.4rem; }
+  strong { color: var(--accent-2); }
+  .lead-sub { font-size: 1.1rem; opacity: 0.9; color: var(--accent-2); }
+  .card {
+    background: rgba(255,255,255,0.06);
+    border: 1px solid rgba(255,255,255,0.08);
+    border-radius: 14px;
+    padding: 14px 16px;
+  }
+
+  /* ---
+    Layout utilities
+
+    Goal:
+    - 2段（最大）に分割する split クラス
+    - grid と組み合わせて 2×3=最大6分割まで作れるようにする
+
+    Usage:
+      <div class="split split-2 grid grid-3">
+        ... (max 6 items)
+      </div>
+  --- */
+
+  :root {
+    --layout-gap: 16px;
+  }
+
+  /* base */
+  .grid,
+  .split {
+    display: grid;
+    gap: var(--layout-gap);
+    width: 100%;
+    /* section(not .lead) が flex なので、残り高さを取りに行って段が潰れにくくする */
+    flex: 1 1 auto;
+    min-height: 0;
+  }
+
+  /* columns */
+  .grid-2 { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .grid-3 { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+
+  /* rows (split) */
+  .split-2 { grid-template-rows: repeat(2, minmax(0, 1fr)); }
+  .split-3 { grid-template-rows: repeat(3, minmax(0, 1fr)); }
+
+  /* children */
+  .grid > *,
+  .split > * {
+    min-width: 0;
+    min-height: 0;
+  }
