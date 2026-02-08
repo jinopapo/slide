@@ -201,6 +201,7 @@ style: |
 
   /* --- Code blocks (override Marp default theme) --- */
   section :is(pre, marp-pre) {
+    box-sizing: border-box;
     background: rgba(0, 0, 0, 0.28) !important;
     border: 1px solid rgba(255, 255, 255, 0.14) !important;
     border-radius: 14px !important;
@@ -209,19 +210,23 @@ style: |
     line-height: 1.35 !important;
     overflow: hidden !important;
     width: 100%;
+    max-width: 100%;
+    align-self: stretch;
     margin-top: 14px;
   }
   section :is(pre, marp-pre) code {
     /* Marp default theme uses 12px fixed -> too small. Override with scalable size. */
-    font-size: 1.05rem !important;
+    font-size: 0.92rem !important;
     color: var(--text) !important;
     background: transparent !important;
+    border: 0 !important;
+    border-radius: 0 !important;
     padding: 0 !important;
     white-space: pre-wrap;
     word-break: break-word;
   }
-  section code {
-    /* inline code */
+  section :is(p, li, td, th, blockquote) code {
+    /* inline code (avoid affecting code blocks) */
     font-size: 0.95em;
     background: rgba(0, 0, 0, 0.18);
     border: 1px solid rgba(255, 255, 255, 0.12);
@@ -317,6 +322,8 @@ style: |
 {document1}
 ## document2
 {document2}
+## document3
+{document3}
 ```
 
 ---
