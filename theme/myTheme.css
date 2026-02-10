@@ -46,12 +46,30 @@
   h2 { font-size: 1.8rem; }
   h3 { font-size: 1.4rem; }
   strong { color: var(--accent-2); }
+  .accent { color: var(--accent); }
   .lead-sub { font-size: 1.1rem; opacity: 0.9; color: var(--accent-2); }
-  .card {
+  /*
+    card:
+    - 基本の囲みスタイル
+
+    list-card:
+    - card をベースにしつつ、中身を上下中央揃えにしたいケース向け
+      (例: 縦に3枚並べるカードリストなど)
+  */
+  .card,
+  .list-card {
     background: rgba(255,255,255,0.06);
     border: 1px solid rgba(255,255,255,0.08);
     border-radius: 14px;
     padding: 14px 16px;
+  }
+
+  .list-card {
+    display: flex;
+    flex-direction: column;
+    justify-content: center; /* vertical center */
+    align-items: flex-start; /* keep left alignment */
+    min-height: 0;
   }
 
   /* ---
