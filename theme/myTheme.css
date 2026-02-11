@@ -103,6 +103,7 @@
   /* columns */
   .grid-2 { grid-template-columns: repeat(2, minmax(0, 1fr)); }
   .grid-3 { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+  .grid-4 { grid-template-columns: repeat(4, minmax(0, 1fr)); }
 
   /* rows (split) */
   .split-2 { grid-template-rows: repeat(2, minmax(0, 1fr)); }
@@ -113,4 +114,131 @@
   .split > * {
     min-width: 0;
     min-height: 0;
+  }
+
+  /* ---
+    Centering utilities
+
+    center:
+      - 親の残り領域を取りつつ、子要素を上下左右中央に配置する
+      - section:not(.lead) が flex column なので flex:1 と min-height:0 を付与
+
+    max-w:
+      - 横幅が広い環境でカードが間延びしないよう最大幅を制限する
+  --- */
+  .center {
+    display: flex;
+    width: 100%;
+    flex: 1 1 auto;
+    min-height: 0;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .max-w {
+    width: 100%;
+    max-width: 1100px;
+  }
+
+  /* ---
+    Arrow utilities
+
+    with-arrows:
+      - grid の gap の中心に小さい矢印を描画する（最後の要素以外）
+      - card間の関係（フロー）を示したいときに利用
+
+    Usage:
+      <div class="grid grid-3 with-arrows"> ... </div>
+  --- */
+  .with-arrows > * {
+    position: relative;
+  }
+
+  .with-arrows > *:not(:last-child)::after {
+    content: "▸";
+    position: absolute;
+    top: 50%;
+    right: calc(var(--layout-gap) * -0.5);
+    transform: translate(50%, -50%);
+    color: var(--accent);
+    font-size: 1.25rem;
+    opacity: 0.9;
+    pointer-events: none;
+  }
+
+  /* ---
+    Arrow utilities (2x2 Z-order)
+
+    with-arrows-z-2x2:
+      - 2列×2行のときに Z順（1→2→3→4）でつながっていることを示す
+      - 1→2: 右矢印
+      - 2→3: 左下へ移動（↙）
+      - 3→4: 右矢印
+
+    Usage:
+      <div class="grid grid-2 split split-2 with-arrows-z-2x2"> ... </div>
+  --- */
+  .with-arrows-z-2x2 > * {
+    position: relative;
+  }
+
+  /* gridコンテナを基準に中央交点へ配置するため */
+  .with-arrows-z-2x2 {
+    position: relative;
+  }
+
+  /* 1 -> 2 */
+  .with-arrows-z-2x2 > *:nth-child(1)::after {
+    content: "▸";
+    position: absolute;
+    top: 50%;
+    right: calc(var(--layout-gap) * -0.5);
+    transform: translate(50%, -50%);
+    color: var(--accent);
+    font-size: 1.25rem;
+    opacity: 0.9;
+    pointer-events: none;
+  }
+
+  /* 2 -> 3 (Z order wrap) */
+  .with-arrows-z-2x2::after {
+    content: "";
+    position: absolute;
+    /* 2列2行の交点（列間gap×行間gapの中心） */
+    left: 50%;
+    top: 50%;
+    width: 14px;
+    height: 14px;
+    background: var(--accent);
+    /* 右向き三角を作ってから回転して左下向きにする */
+    clip-path: polygon(100% 50%, 0 0, 0 100%);
+    transform: translate(-50%, -50%) rotate(135deg);
+    opacity: 0.9;
+    pointer-events: none;
+  }
+
+  /* フォールバック（clip-path非対応の場合） */
+  @supports not (clip-path: polygon(0 0, 100% 0, 0 100%)) {
+    .with-arrows-z-2x2::after {
+      width: auto;
+      height: auto;
+      background: none;
+      content: "↙";
+      color: var(--accent);
+      font-size: 1.35rem;
+      transform: translate(-50%, -50%);
+    }
+  }
+
+  /* 3 -> 4 */
+  .with-arrows-z-2x2 > *:nth-child(3)::after {
+    content: "▸";
+    position: absolute;
+    top: 50%;
+    right: calc(var(--layout-gap) * -0.5);
+    transform: translate(50%, -50%);
+    color: var(--accent);
+    font-size: 1.25rem;
+    opacity: 0.9;
+    pointer-events: none;
   }

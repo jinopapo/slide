@@ -1,0 +1,10 @@
+model: gpt-5.2
+reviews:
+  - name: typo-review
+    description: 孤児脱字のチェック
+    model: ""
+    parallel: false
+  - name: template-review
+    description: templateを正しく使っているか
+    model: ""
+    parallel: false

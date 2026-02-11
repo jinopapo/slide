@@ -1,0 +1,2 @@
+template配下のREADME.md以外のファイルでtemplate/README.mdに説明がないファイルがないかチェックしてください
+もし説明のないファイルがあった場合はtemplate/README.mdに説明を追記する旨の指摘をしてください
