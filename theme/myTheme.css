@@ -62,7 +62,39 @@
     border: 1px solid rgba(255,255,255,0.08);
     border-radius: 14px;
     padding: 14px 16px;
+    /* カード内は情報量が増えやすいので、本文をやや小さめにする */
+    font-size: 0.92rem;
+    line-height: 1.45;
+
+    /* card内タイトルのデフォルトサイズ（必要に応じて utility で上書き） */
+    --card-title-size: 1.15rem;
   }
+
+  .card h3,
+  .list-card h3 {
+    font-size: var(--card-title-size);
+    margin-top: 0;
+    margin-bottom: 0.45em;
+    line-height: 1.3;
+  }
+
+  .card ul,
+  .list-card ul {
+    margin-top: 0.25em;
+    margin-bottom: 0;
+    padding-left: 1.1em;
+  }
+
+  .card li,
+  .list-card li {
+    margin: 0.15em 0;
+  }
+
+  /* card内タイトルサイズ調整ユーティリティ */
+  .title-xs { --card-title-size: 0.95rem; }
+  .title-sm { --card-title-size: 1.05rem; }
+  .title-md { --card-title-size: 1.15rem; }
+  .title-lg { --card-title-size: 1.25rem; }
 
   .list-card {
     display: flex;
@@ -95,9 +127,15 @@
     display: grid;
     gap: var(--layout-gap);
     width: 100%;
-    /* section(not .lead) が flex なので、残り高さを取りに行って段が潰れにくくする */
-    flex: 1 1 auto;
+    /* カードの過剰な縦伸びを避けるため、必要以上に高さを取りに行かない */
+    flex: 0 0 auto;
     min-height: 0;
+    align-items: start;
+  }
+
+  /* gridの行トラックが縦方向に不自然に伸びるのを抑える */
+  .grid {
+    align-content: start;
   }
 
   /* columns */
@@ -138,6 +176,19 @@
   .max-w {
     width: 100%;
     max-width: 1100px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  section:not(.lead) > .grid.max-w,
+  section:not(.lead) > .split.max-w {
+    flex: 1 1 auto;
+    align-content: center;
+  }
+
+  /* 2x2のグリッドテンプレートは行を内容量に合わせてスカスカを防ぐ */
+  .grid.split-2.max-w {
+    grid-template-rows: repeat(2, auto);
   }
 
   /* ---

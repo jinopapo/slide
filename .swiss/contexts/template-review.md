@@ -1,0 +1,4 @@
+このprojectはmarpの統合環境です
+marpのtemplate集、自作のtheme、作ったslideが含まれます
+
+gitのdiffが入力されるので、レビューをしてください

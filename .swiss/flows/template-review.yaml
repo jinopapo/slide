@@ -4,3 +4,7 @@ reviews:
     description: templateの追加が正しくできているかレビュー
     model: ""
     parallel: false
+  - name: css-review
+    description: css、templateのレビュー
+    model: ""
+    parallel: false
