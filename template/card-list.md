@@ -3,6 +3,7 @@ marp: true
 theme: myTheme
 ---
 ## セクションタイトル
+<div class="center">
 <div class="split split-3">
   <div class="list-card">
     <h3>cardタイトル</h3>
@@ -13,4 +14,5 @@ theme: myTheme
   <div class="list-card">
     <h3>cardタイトル</h3>
   </div>
+</div>
 </div>
