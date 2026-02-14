@@ -3,7 +3,7 @@ marp: true
 theme: myTheme
 ---
 ## セクションタイトル
-<div class="grid grid-2 max-w">
+<div class="grid grid-2 max-w equal-height">
   <div class="card">
     <h3>gridタイトル</h3>
     <ul>

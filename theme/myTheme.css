@@ -154,6 +154,24 @@
     min-height: 0;
   }
 
+  /*
+    Equal height cards (opt-in)
+    - 同一行のカードを最大高さに揃える
+    - list-card は等高時のみ上寄せにする
+  */
+  .grid.equal-height,
+  .split.equal-height {
+    align-items: stretch;
+  }
+
+  .equal-height > .list-card {
+    justify-content: flex-start;
+  }
+
+  .equal-height > .list-card.center-content {
+    justify-content: center;
+  }
+
   /* ---
     Centering utilities
 
