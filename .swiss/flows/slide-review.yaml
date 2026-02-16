@@ -1,10 +1,18 @@
 model: gpt-5.2
 reviews:
   - name: typo-review
-    description: 孤児脱字のチェック
+    description: 誤字脱字のチェック
     model: ""
     parallel: false
   - name: template-review
     description: templateを正しく使っているか
+    model: ""
+    parallel: false
+  - name: memo-review
+    description: memoの内容から大きく逸脱していないか
+    model: ""
+    parallel: false
+  - name: summery-check
+    description: まとめや全体像を提示するスライドが正しくサマリーできているかのチェック
     model: ""
     parallel: false
