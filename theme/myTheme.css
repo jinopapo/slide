@@ -245,6 +245,81 @@
     align-content: center;
   }
 
+  /* ---
+    Quadrant (2x2) with axis labels
+
+    quadrant-2x2:
+      - 左側に縦軸ラベル（上/下）
+      - 下側に横軸ラベル（左/右）
+      - 右上に2x2カードグリッド
+
+    Usage:
+      <div class="quadrant-2x2 max-w">
+        <div class="quadrant-y">...</div>
+        <div class="quadrant-main grid grid-2 split split-2 equal-height">...</div>
+        <div class="quadrant-corner"></div>
+        <div class="quadrant-x">...</div>
+      </div>
+  --- */
+  .quadrant-2x2 {
+    display: grid;
+    grid-template-columns: 150px minmax(0, 1fr) 150px;
+    grid-template-rows: auto auto;
+    gap: var(--layout-gap);
+    width: min(940px, 100%);
+    max-width: 940px;
+    flex: 1 1 auto;
+    min-height: 0;
+    align-items: stretch;
+    align-content: center;
+  }
+
+  /* 4象限テンプレートは少し幅を絞ってカードの横幅を抑える */
+  .quadrant-2x2.max-w {
+    max-width: 940px;
+  }
+
+  .quadrant-main {
+    width: 100%;
+    min-width: 0;
+  }
+
+  .quadrant-y {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    gap: 8px;
+    min-height: 0;
+  }
+
+  .quadrant-x {
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+    gap: 8px;
+  }
+
+  .quadrant-corner {
+    min-height: 1px;
+  }
+
+  .quadrant-spacer {
+    min-height: 1px;
+  }
+
+  .axis-label {
+    color: var(--accent);
+    font-weight: 700;
+    font-size: 0.9rem;
+    text-align: center;
+    white-space: normal;
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 999px;
+    padding: 4px 8px;
+    line-height: 1.25;
+  }
+
   /* 2x2のグリッドテンプレートは行を内容量に合わせてスカスカを防ぐ */
   .grid.split-2.max-w {
     grid-template-rows: repeat(2, auto);
